@@ -38,6 +38,6 @@ class TopStoryState extends State<TopStory> {
 
   loadTopStoryDetails() async {
     Map data = await topstory(id);
-    setState(() => story = new Story(data));
+    if (mounted) setState(() => story = new Story(data));
   }
 }

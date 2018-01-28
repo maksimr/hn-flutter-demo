@@ -20,17 +20,23 @@ class TopStoriesState extends State<TopStories> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new ListView(children: buildTopStories()),
-    );
+    return new Scaffold(body: buildList());
   }
 
   loadTopStories() async {
-    List<int> data = await topstories(15);
-    setState(() => stories = data);
+    List<int> data = await topstories();
+    if (mounted) setState(() => stories = data);
   }
 
-  buildTopStories() {
-    return stories.map((i) => new TopStory(i)).toList();
+  buildList() {
+    if (stories.length == 0) return null;
+
+    return new ListView.builder(
+      itemExtent: 50.0,
+      itemCount: stories.length,
+      itemBuilder: (BuildContext context, int index) {
+        return new TopStory(stories[index]);
+      },
+    );
   }
 }

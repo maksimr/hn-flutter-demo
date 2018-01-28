@@ -26,7 +26,7 @@ class StoryTitle extends StatelessWidget {
 
   buildLink() {
     return new Text(
-      "${story.url.host}",
+      "${story?.url?.host}",
       style: new TextStyle(
         color: new Color.fromRGBO(0, 102, 33, 0.8),
         fontSize: 12.0,

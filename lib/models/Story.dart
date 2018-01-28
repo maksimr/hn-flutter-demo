@@ -5,7 +5,11 @@ class Story {
 
   Story(Map params) {
     title = params["title"];
-    url = Uri.parse(params["url"]);
+
+    if (params["url"] != null) {
+      url = Uri.parse(params["url"]);
+    }
+
     score = params["score"];
   }
 }
