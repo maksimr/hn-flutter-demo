@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:hn/models/Story.dart';
 import 'package:hn/resources/topstory.dart';
 import 'package:hn/components/Score.dart';
@@ -33,7 +34,16 @@ class TopStoryState extends State<TopStory> {
     return new ListTile(
       title: new StoryTitle(story),
       leading: new Score(story.score),
+      onTap: onTap,
     );
+  }
+
+  onTap() async {
+    var url = story?.url?.toString();
+
+    if (url != null && (await canLaunch(url))) {
+      launch(story.url.toString());
+    }
   }
 
   loadTopStoryDetails() async {
