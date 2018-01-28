@@ -1,15 +1,10 @@
-import 'dart:io';
-import 'dart:convert';
+import 'package:hn/resources/hackernews.dart';
 
 Map _cache = {};
 
 topstory(id) async {
   if (_cache[id] == null) {
-    var client = new HttpClient();
-    var res = await (await client.getUrl(
-            Uri.parse("https://hacker-news.firebaseio.com/v0/item/$id.json")))
-        .close();
-    _cache[id] = JSON.decode(await res.transform(UTF8.decoder).join());
+    _cache[id] = await hackernews("item/$id.json");
   }
 
   return _cache[id];
