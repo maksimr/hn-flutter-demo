@@ -32,7 +32,7 @@ class TopStoriesState extends State<TopStories> {
     if (stories.length == 0) return null;
 
     return new ListView.builder(
-      itemExtent: 50.0,
+      itemExtent: TopStory.HEIGHT,
       itemCount: stories.length,
       itemBuilder: (BuildContext context, int index) {
         return new TopStory(stories[index]);

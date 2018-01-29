@@ -7,6 +7,8 @@ import 'package:hn/components/Score.dart';
 import 'package:hn/components/StoryTitle.dart';
 
 class TopStory extends StatefulWidget {
+  static const double HEIGHT = 50.0;
+
   final int id;
 
   TopStory(this.id);
@@ -29,7 +31,7 @@ class TopStoryState extends State<TopStory> {
 
   @override
   Widget build(BuildContext context) {
-    if (story == null) return new Text("");
+    if (story == null) return buildPlaceholder();
 
     return new ListTile(
       title: new StoryTitle(story),
@@ -38,9 +40,20 @@ class TopStoryState extends State<TopStory> {
     );
   }
 
-  onTap() async {
-    var url = story?.url?.toString();
+  buildPlaceholder() {
+    return new Placeholder(
+      color: new Color(0),
+      strokeWidth: 0.0,
+      fallbackHeight: TopStory.HEIGHT,
+    );
+  }
 
+  onTap() {
+    openLink();
+  }
+
+  openLink() async {
+    var url = story?.url?.toString();
     if (url != null && (await canLaunch(url))) {
       launch(story.url.toString());
     }
