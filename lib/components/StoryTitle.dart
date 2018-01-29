@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:hn/components/StoryLink.dart';
 import 'package:hn/models/Story.dart';
 
 class StoryTitle extends StatelessWidget {
@@ -25,12 +26,6 @@ class StoryTitle extends StatelessWidget {
   }
 
   buildLink() {
-    return new Text(
-      "${story?.url?.host}",
-      style: new TextStyle(
-        color: new Color.fromRGBO(0, 102, 33, 0.8),
-        fontSize: 12.0,
-      ),
-    );
+    return new StoryLink(story);
   }
 }

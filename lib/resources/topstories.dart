@@ -1,8 +1,13 @@
 import 'package:hn/resources/hackernews.dart';
 
-topstories([int top]) async {
-  List<int> data = await hackernews("topstories.json");
+Map _cache = {};
 
-  if (top == null || data.length < top) return data;
+topstories([int top = 500]) async {
+  if (_cache[top] == null) {
+    _cache[top] = (await hackernews("topstories.json"));
+  }
+
+  var data = _cache[top];
+  if (data.length <= top) return data;
   return data.getRange(0, top).toList();
 }

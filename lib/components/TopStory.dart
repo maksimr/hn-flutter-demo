@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:hn/components/StoryPage.dart';
 import 'package:hn/models/Story.dart';
 import 'package:hn/resources/topstory.dart';
 import 'package:hn/components/Score.dart';
@@ -49,14 +49,11 @@ class TopStoryState extends State<TopStory> {
   }
 
   onTap() {
-    openLink();
-  }
-
-  openLink() async {
-    var url = story?.url?.toString();
-    if (url != null && (await canLaunch(url))) {
-      launch(story.url.toString());
-    }
+    return Navigator.of(context).push(
+          new MaterialPageRoute<Null>(
+            builder: (BuildContext context) => new StoryPage(story),
+          ),
+        );
   }
 
   loadTopStoryDetails() async {
